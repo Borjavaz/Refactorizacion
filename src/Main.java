@@ -2,17 +2,21 @@ public class Main {
     /**
      * metodo para devolver la puntuacion de tenis
      */
-    public static String getScore(int m_score1, int m_score2) {
+    public static String getScore(int player1Score, int player2Score) {
+        if (player1Score < 0 || player2Score < 0 || player1Score > 4 || player2Score > 4) {
+            return "Invalid score input!";
+        }
+
         String score = "";
 
-        if (m_score1 == m_score2) {
-            score = getTieScore(m_score1);
+        if (player1Score == player2Score) {
+            score = getTieScore(player1Score);
         }
-        else if (m_score1 >= 4 || m_score2 >= 4) {
-            score = getWinnerScore(m_score1, m_score2);
+        else if (player1Score >= 4 || player2Score >= 4) {
+            score = getWinnerScore(player1Score, player2Score);
         }
         else {
-            score = getNormalScore(m_score1, m_score2);
+            score = getNormalScore(player1Score, player2Score);
         }
 
         return score;
@@ -21,10 +25,10 @@ public class Main {
     /**
      * Método para obtener la puntuación cuando hay un empate.
      */
-    private static String getTieScore(int m_score1) {
+    private static String getTieScore(int player1Score) {
         String score = "";
 
-        switch (m_score1) {
+        switch (player1Score) {
             case 0:
                 score = "Love-All";
                 break;
@@ -48,9 +52,9 @@ public class Main {
     /**
      * Método para obtener el marcador en los casos en los que hay un ganador.
      */
-    private static String getWinnerScore(int m_score1, int m_score2) {
+    private static String getWinnerScore(int player1Score, int player2Score) {
         String score = "";
-        int minusResult = m_score1 - m_score2;
+        int minusResult = player1Score - player2Score;
 
         if (minusResult == 1) {
             score = "Advantage player1";
@@ -68,16 +72,16 @@ public class Main {
     /**
      * Método para obtener el marcador normal sin empate.
      */
-    private static String getNormalScore(int m_score1, int m_score2) {
+    private static String getNormalScore(int player1Score, int player2Score) {
         String score = "";
 
         int tempScore = 0;
         for (int i = 1; i < 3; i++) {
             if (i == 1) {
-                tempScore = m_score1;
+                tempScore = player1Score;
             } else {
                 score += "-";
-                tempScore = m_score2;
+                tempScore = player2Score;
             }
 
             switch (tempScore) {
