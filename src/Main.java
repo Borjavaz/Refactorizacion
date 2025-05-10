@@ -2,51 +2,100 @@ public class Main {
     /**
      * metodo para devolver la puntuacion de tenis
      */
-
-    public static String getScore(int scorePlayer1, int scorePlayer2) {
+    public static String getScore(int m_score1, int m_score2) {
         String score = "";
 
-        if (scorePlayer1 == scorePlayer2) {
-            score = getScoreForTie(scorePlayer1);
-        } else if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
-            score = getScoreForAdvantageOrWin(scorePlayer1, scorePlayer2);
-        } else {
-            score = getScoreForNormalGame(scorePlayer1, scorePlayer2);
+        if (m_score1 == m_score2) {
+            score = getTieScore(m_score1);
+        }
+        else if (m_score1 >= 4 || m_score2 >= 4) {
+            score = getWinnerScore(m_score1, m_score2);
+        }
+        else {
+            score = getNormalScore(m_score1, m_score2);
         }
 
         return score;
     }
 
-    private static String getScoreForTie(int score) {
-        switch (score) {
-            case 0: return "Love-All";
-            case 1: return "Fifteen-All";
-            case 2: return "Thirty-All";
-            case 3: return "Forty-All";
-            default: return "Deuce";
+    /**
+     * Método para obtener la puntuación cuando hay un empate.
+     */
+    private static String getTieScore(int m_score1) {
+        String score = "";
+
+        switch (m_score1) {
+            case 0:
+                score = "Love-All";
+                break;
+            case 1:
+                score = "Fifteen-All";
+                break;
+            case 2:
+                score = "Thirty-All";
+                break;
+            case 3:
+                score = "Forty-All";
+                break;
+            default:
+                score = "Deuce";
+                break;
         }
+
+        return score;
     }
 
-    private static String getScoreForAdvantageOrWin(int scorePlayer1, int scorePlayer2) {
-        int scoreDifference = scorePlayer1 - scorePlayer2;
+    /**
+     * Método para obtener el marcador en los casos en los que hay un ganador.
+     */
+    private static String getWinnerScore(int m_score1, int m_score2) {
+        String score = "";
+        int minusResult = m_score1 - m_score2;
 
-        if (scoreDifference == 1) return "Advantage player1";
-        if (scoreDifference == -1) return "Advantage player2";
-        if (scoreDifference >= 2) return "Win for player1";
-        return "Win for player2";
-    }
-
-    private static String getScoreForNormalGame(int scorePlayer1, int scorePlayer2) {
-        return convertScoreToString(scorePlayer1) + "-" + convertScoreToString(scorePlayer2);
-    }
-
-    private static String convertScoreToString(int score) {
-        switch (score) {
-            case 0: return "Love";
-            case 1: return "Fifteen";
-            case 2: return "Thirty";
-            case 3: return "Forty";
-            default: return "";
+        if (minusResult == 1) {
+            score = "Advantage player1";
+        } else if (minusResult == -1) {
+            score = "Advantage player2";
+        } else if (minusResult >= 2) {
+            score = "Win for player1";
+        } else {
+            score = "Win for player2";
         }
+
+        return score;
     }
+
+    /**
+     * Método para obtener el marcador normal sin empate.
+     */
+    private static String getNormalScore(int m_score1, int m_score2) {
+        String score = "";
+
+        int tempScore = 0;
+        for (int i = 1; i < 3; i++) {
+            if (i == 1) {
+                tempScore = m_score1;
+            } else {
+                score += "-";
+                tempScore = m_score2;
+            }
+
+            switch (tempScore) {
+                case 0:
+                    score += "Love";
+                    break;
+                case 1:
+                    score += "Fifteen";
+                    break;
+                case 2:
+                    score += "Thirty";
+                    break;
+                case 3:
+                    score += "Forty";
+                    break;
+            }
+        }
+
+        return score;
     }
+}
