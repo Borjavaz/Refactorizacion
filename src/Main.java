@@ -25,7 +25,6 @@ public class Main {
                 default:
                     score = "Deuce";
                     break;
-
             }
         }
         else if (player1Score >=4 || player2Score >=4)
