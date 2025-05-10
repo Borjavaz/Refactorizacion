@@ -13,6 +13,7 @@ Se podría entender como el mantenimiento del código, para facilitar su compren
 
 ![espagueti](./image/refactoringspagueti.png)
 
+
 La refactorización debe ser un paso aislado en el diseño de un programa, para evitar introducir errores de código al reescribir o modificar algunas partes del mismo. 
 Si después de refactorizar hemos alterado el funcionamiento del código, hemos cometido errores al refactorizar.
 
