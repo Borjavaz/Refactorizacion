@@ -2,6 +2,7 @@ public class Main {
     /**
      * metodo para devolver la puntuacion de tenis
      */
+
     public static String getScore(int player1Score, int player2Score) {
         String score = "";
         int tempScore = 0;
